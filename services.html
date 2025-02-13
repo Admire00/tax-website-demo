@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Fiscal Gateway</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        :root {
+            --primary-blue: #3669C9;
+            --secondary-blue: #5A8AE4;
+            --secondary-green: #67B82D;
+            --accent-purple: #8B5CF6;
+            --accent-pink: #EC4899;
+            --text-dark: #1A202C;
+            --text-gray: #4A5568;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #f8fafc;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+
+        /* Enhanced Header Styles */
+        .header {
+          background: rgba(54, 105, 201, 0.98);
+          backdrop-filter: blur(10px);
+          padding: 1rem;
+          position: fixed;
+          width: 100%;
+          top: 0;
+          z-index: 100;
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+      
+      .header-content {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 1rem;
+          position: relative;
+      }
+      
+      /* Logo Styles */
+      .logo {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          text-decoration: none;
+          z-index: 101;
+      }
+      
+      .logo svg {
+          width: 40px;
+          height: 40px;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      }
+      
+      .logo-text {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: white;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      
+      .mobile-menu-button {
+          display: none;
+      }
+      
+      .nav-links {
+          display: flex;
+          gap: 1.5rem;
+          align-items: center;
+      }
+      
+      .nav-links a {
+          color: white;
+          text-decoration: none;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          padding: 0.5rem 1rem;
+          border-radius: 0.5rem;
+      }
+      
+      .nav-links a:hover {
+          background: rgba(255, 255, 255, 0.1);
+          transform: translateY(-2px);
+      }
+      
+      /* Mobile Styles */
+      @media (max-width: 768px) {
+          .mobile-menu-button {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              width: 30px;
+              height: 21px;
+              background: transparent;
+              border: none;
+              cursor: pointer;
+              padding: 0;
+              z-index: 101;
+          }
+      
+          .mobile-menu-button span {
+              width: 100%;
+              height: 3px;
+              background-color: white;
+              border-radius: 3px;
+              transition: all 0.3s ease;
+          }
+      
+          .nav-links {
+              display: flex;
+              position: fixed;
+              top: 0;
+              right: -100%;
+              height: 100vh;
+              width: 100%;
+              max-width: 300px;
+              background: rgba(54, 105, 201, 0.98);
+              backdrop-filter: blur(10px);
+              flex-direction: column;
+              padding: 5rem 2rem 2rem;
+              transition: right 0.3s ease;
+              gap: 1.5rem;
+          }
+      
+          .nav-links.active {
+              right: 0;
+          }
+      
+          .nav-links a {
+              width: 100%;
+              text-align: center;
+              padding: 0.75rem;
+              font-size: 1.1rem;
+          }
+      
+          .mobile-menu-button.active span:first-child {
+              transform: translateY(9px) rotate(45deg);
+          }
+      
+          .mobile-menu-button.active span:nth-child(2) {
+              opacity: 0;
+          }
+      
+          .mobile-menu-button.active span:last-child {
+              transform: translateY(-9px) rotate(-45deg);
+          }
+      }
+      
+      /* Small Mobile Styles */
+      @media (max-width: 480px) {
+          .logo svg {
+              width: 32px;
+              height: 32px;
+          }
+      
+          .logo-text {
+              font-size: 1.1rem;
+          }
+      
+          .header {
+              padding: 0.75rem 0;
+          }
+      }
+
+        /* Enhanced Services Hero Section */
+        .services-hero {
+            padding: 12rem 2rem 8rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) { width: 150px; height: 150px; top: 10%; left: 10%; animation-delay: 0s; }
+        .shape:nth-child(2) { width: 100px; height: 100px; top: 20%; right: 20%; animation-delay: -5s; }
+        .shape:nth-child(3) { width: 80px; height: 80px; bottom: 30%; left: 30%; animation-delay: -10s; }
+        .shape:nth-child(4) { width: 120px; height: 120px; bottom: 10%; right: 10%; animation-delay: -15s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(100px, 100px) rotate(180deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        .services-hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        .services-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .services-hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Enhanced Services Grid */
+        .services-grid {
+            max-width: 1200px;
+            margin: -6rem auto 4rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            color: white;
+            font-size: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(54, 105, 201, 0.2);
+        }
+
+        .service-icon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+
+        .service-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .service-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .service-link:hover {
+            gap: 1rem;
+            color: var(--accent-purple);
+        }
+
+        /* Enhanced Features Section */
+        .features-section {
+            padding: 8rem 2rem;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(54, 105, 201, 0.05), rgba(139, 92, 246, 0.05));
+            z-index: 0;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-content h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--text-dark), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .features-list {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transform: translateX(10px);
+        }
+
+        .feature-icon {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .feature-text h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .feature-text p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .features-image img {
+            border-radius: 2rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .features-image img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                margin-top: -4rem;
+            }
+
+            .features-grid {
+                gap: 4rem;
+            }
+
+            .services-hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .services-hero {
+                padding: 10rem 2rem 6rem;
+            }
+
+            .services-hero h1 {
+                font-size: 3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .feature-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .feature-item:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                margin-top: -3rem;
+            }
+
+            .services-hero {
+                padding: 8rem 1.5rem 5rem;
+            }
+
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .services-hero p {
+                font-size: 1.2rem;
+            }
+
+            .service-card {
+                padding: 2rem;
+            }
+
+            .features-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .features-content h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+   <!-- Header HTML -->
+<header class="header">
+  <div class="header-content">
+      <a href="#" class="logo">
+          <svg viewBox="0 0 200 150">
+              <path d="M100 30 C60 30, 30 60, 30 100" fill="white" />
+              <path d="M100 30 C140 30, 170 60, 170 100" fill="#67B82D" />
+          </svg>
+          <span class="logo-text">Fiscal Gateway</span>
+      </a>
+      <button class="mobile-menu-button" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+      </button>
+      <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="contact.html">Contact</a>
+          <a href="login.html">Login</a>
+          <a href="signup.html">Sign Up</a>
+      </nav>
+  </div>
+</header>
+
+
+    <!-- Services Hero -->
+    <section class="services-hero">
+        <div class="services-hero-content">
+            <h1>Our Services</h1>
+            <p>Comprehensive financial solutions tailored to your business needs</p>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon">💼</div>
+            <h3>Financial Planning</h3>
+            <p>Strategic financial planning and analysis to help your business make informed decisions and achieve long-term goals.</p>
+            <a href="#" class="service-link">Learn More →</a>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">📊</div>
+            <h3>Investment Management</h3>
+            <p>Expert investment strategies and portfolio management to maximize returns and minimize risks.</p>
+            <a href="#" class="service-link">Learn More →</a>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">🔒</div>
+            <h3>Risk Management</h3>
+            <p>Comprehensive risk assessment and management solutions to protect your business assets and operations.</p>
+            <a href="#" class="service-link">Learn More →</a>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">📱</div>
+            <h3>Digital Banking</h3>
+            <p>Modern digital banking solutions with advanced features for seamless financial operations.</p>
+            <a href="#" class="service-link">Learn More →</a>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">📈</div>
+            <h3>Market Analysis</h3>
+            <p>In-depth market research and analysis to help you stay ahead of market trends and opportunities.</p>
+            <a href="#" class="service-link">Learn More →</a>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">🤝</div>
+            <h3>Business Consulting</h3>
+            <p>Expert business consulting services to help you optimize operations and achieve growth.</p>
+            <a href="#" class="service-link">Learn More →</a>
+        </div>
+    </div>
+    
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="features-grid">
+            <div class="features-content">
+                <h2>Why Choose Our Services</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">
+                            <h4>Expert Team</h4>
+                            <p>Our team of financial experts brings years of industry experience to help you succeed.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">
+                            <h4>Tailored Solutions</h4>
+                            <p>Customized financial solutions designed to meet your specific business needs.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">
+                            <h4>Advanced Technology</h4>
+                            <p>State-of-the-art financial technology to streamline your operations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="features-image">
+                <img src="img\invoice2.jpeg" alt="Features illustration" style="width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </section>
+
+  
+<!-- Integration Section -->
+<section class="integration-section">
+  <div class="integration-background"></div>
+  <div class="container">
+      <div class="integration-header" data-aos="fade-up">
+          <h2 class="section-title">Fiscal Integrations</h2>
+          <p class="integration-description">
+              Seamlessly connect your business with our comprehensive fiscal integrations. We integrate with leading accounting systems to provide unparalleled visibility, control, and strategic decision-making across your financial landscape.
+          </p>
+      </div>
+      <div class="integration-grid">
+          <div class="integration-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="integration-icon">
+                  <img src="img\quickbooks.png" alt="QuickBooks Logo" class="software-icon">
+              </div>
+              <h3>QuickBooks</h3>
+              <p>Seamless integration with Intuit QuickBooks accounting software for streamlined financial management.</p>
+              <div class="integration-hover"></div>
+          </div>
+          <div class="integration-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="integration-icon">
+                  <img src="img\excel.png" alt="Excel Logo" class="software-icon">
+              </div>
+              <h3>Excel</h3>
+              <p>Powerful Excel-based solutions for advanced financial analysis, reporting, and modeling.</p>
+              <div class="integration-hover"></div>
+          </div>
+          <div class="integration-card" data-aos="fade-up" data-aos-delay="300">
+              <div class="integration-icon">
+                  <img src="img\sagepastel.png" alt="Sage Pastel Logo" class="software-icon">
+              </div>
+              <h3>Sage Pastel</h3>
+              <p>Integration with the popular Sage Pastel accounting platform for comprehensive financial capabilities.</p>
+              <div class="integration-hover"></div>
+          </div>
+          <div class="integration-card" data-aos="fade-up" data-aos-delay="400">
+              <div class="integration-icon">
+                  <img src="img\sage1.png" alt="Sage One Logo" class="software-icon">
+              </div>
+              <h3>Sage One</h3>
+              <p>Connection with Sage One cloud-based accounting and business management software.</p>
+              <div class="integration-hover"></div>
+          </div>
+          <div class="integration-card" data-aos="fade-up" data-aos-delay="500">
+              <div class="integration-icon">
+                  <img src="img\sap.png" alt="SAP Business One Logo" class="software-icon">
+              </div>
+              <h3>SAP Business One</h3>
+              <p>Integration with the SAP Business One ERP system for end-to-end financial and operational control.</p>
+              <div class="integration-hover"></div>
+          </div>
+          <div class="integration-card" data-aos="fade-up" data-aos-delay="600">
+              <div class="integration-icon">
+                  <img src="img\zoho.png" alt="Zoho Books Logo" class="software-icon">
+              </div>
+              <h3>Zoho Books</h3>
+              <p>Coupling with Zoho Books accounting platform to enable real-time financial insights and automation.</p>
+              <div class="integration-hover"></div>
+          </div>
+      </div>
+      <div class="integration-cta" data-aos="fade-up" data-aos-delay="700">
+          <a href="integrations.html" class="cta-button">Start Your Fiscal Transformation</a>
+      </div>
+  </div>
+  <style>
+      .integration-section {
+          padding: 8rem 2rem;
+          position: relative;
+          overflow: hidden;
+          background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      }
+
+      .integration-background {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: 
+              radial-gradient(circle at 0% 0%, rgba(54, 105, 201, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 100% 100%, rgba(103, 184, 45, 0.05) 0%, transparent 50%);
+          z-index: 0;
+      }
+
+      .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
+      }
+
+      .integration-header {
+          text-align: center;
+          margin-bottom: 4rem;
+      }
+
+      .section-title {
+          font-size: 3rem;
+          margin-bottom: 1.5rem;
+          background: var(--text-dark);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+      }
+
+      .integration-description {
+          max-width: 800px;
+          margin: 0 auto;
+          font-size: 1.2rem;
+          color: var(--text-gray);
+          line-height: 1.7;
+      }
+
+      .integration-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+          margin-bottom: 4rem;
+      }
+
+      .integration-card {
+          background: white;
+          border-radius: 1.5rem;
+          padding: 2.5rem;
+          text-align: center;
+          position: relative;
+          transition: all 0.4s ease;
+          border: 1px solid rgba(0, 0, 0, 0.05);
+          overflow: hidden;
+      }
+
+      .integration-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .integration-icon {
+          margin-bottom: 2rem;
+          position: relative;
+          width: 80px;
+          height: 80px;
+          margin: 0 auto 2rem;
+      }
+
+      .software-icon {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          transition: transform 0.3s ease;
+      }
+
+      .integration-card:hover .software-icon {
+          transform: scale(1.1);
+      }
+
+      .integration-card h3 {
+          font-size: 1.75rem;
+          margin-bottom: 1rem;
+          color: var(--text-dark);
+      }
+
+      .integration-card p {
+          color: var(--text-gray);
+          line-height: 1.7;
+          font-size: 1.1rem;
+      }
+
+      .integration-hover {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(45deg, transparent, rgba(54, 105, 201, 0.03), transparent);
+          transform: translateX(-100%) rotate(45deg);
+          transition: transform 0.6s ease;
+      }
+
+      .integration-card:hover .integration-hover {
+          transform: translateX(100%) rotate(45deg);
+      }
+
+      .integration-cta {
+          text-align: center;
+      }
+
+      .cta-button {
+          display: inline-block;
+          padding: 1.25rem 2.5rem;
+          background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+          color: white;
+          text-decoration: none;
+          border-radius: 1rem;
+          font-weight: 600;
+          font-size: 1.2rem;
+          transition: all 0.3s ease;
+          box-shadow: 0 10px 20px rgba(54, 105, 201, 0.2);
+      }
+
+      .cta-button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 15px 30px rgba(54, 105, 201, 0.3);
+      }
+
+      @media (max-width: 1024px) {
+          .integration-grid {
+              grid-template-columns: repeat(2, 1fr);
+          }
+      }
+
+      @media (max-width: 768px) {
+          .section-title {
+              font-size: 2.5rem;
+          }
+
+          .integration-description {
+              font-size: 1.1rem;
+          }
+      }
+
+      @media (max-width: 640px) {
+          .integration-grid {
+              grid-template-columns: 1fr;
+          }
+
+          .integration-section {
+              padding: 4rem 1.5rem;
+          }
+
+          .section-title {
+              font-size: 2rem;
+          }
+      }
+  </style>
+</section>
+
+<!-- Initialize AOS -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+          duration: 800,
+          once: true,
+          offset: 100
+      });
+  });
+</script>
+
+
+
+
+    <div class="footer-section">
+        <!-- Background Pattern -->
+        <div class="footer-background"></div>
+      
+        <div class="footer-grid">
+          <!-- About Us Section -->
+          <div class="footer-column">
+            <h3 class="footer-heading">About us</h3>
+            <p class="footer-text">Fiscal Gateway is a leading provider of financial solutions and technical services, empowering modern businesses to achieve their financial goals.</p>
+            <div class="newsletter-box">
+              <input type="email" placeholder="Enter Your Email" class="footer-input">
+              <button class="footer-button">Subscribe to Newsletter</button>
+            </div>
+          </div>
+      
+          <!-- Fiscal Portal Section -->
+          <div class="footer-column">
+            <h3 class="footer-heading">Fiscal Portal</h3>
+            <div class="portal-links">
+              <a href="#" class="portal-link">
+                <span class="portal-icon">🔔</span>
+                <div class="portal-text">
+                  <div class="portal-title">Alerts</div>
+                  <div class="portal-subtitle">Stay updated with notifications</div>
+                </div>
+              </a>
+              <a href="#" class="portal-link">
+                <span class="portal-icon">📰</span>
+                <div class="portal-text">
+                  <div class="portal-title">News</div>
+                  <div class="portal-subtitle">Latest financial updates</div>
+                </div>
+              </a>
+              <a href="#" class="portal-link">
+                <span class="portal-icon">📑</span>
+                <div class="portal-text">
+                  <div class="portal-title">Documents</div>
+                  <div class="portal-subtitle">Access important files</div>
+                </div>
+              </a>
+            </div>
+          </div>
+      
+          <!-- Latest Updates Section -->
+          <div class="footer-column">
+            <h3 class="footer-heading">Latest updates</h3>
+            <div class="updates-box">
+              <div class="updates-header">
+                <div class="updates-title">@FiscalGateway</div>
+                <div class="updates-subtitle">Follow us for updates</div>
+              </div>
+              <div class="updates-content">
+                Stay connected with our latest news and updates
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+          <p>© 2025 Fiscal Gateway. All Rights Reserved.</p>
+        </div>
+      
+        <style>
+          .footer-section {
+            background: linear-gradient(135deg, #3669C9, #5A8AE4);
+            color: white;
+            padding: 6rem 0 4rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            position: relative;
+            overflow: hidden;
+          }
+      
+          .footer-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 100% 100%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                              radial-gradient(circle at 0% 0%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            opacity: 0.6;
+          }
+      
+          .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+          }
+      
+          .footer-column {
+            animation: fadeIn 0.8s ease-out;
+          }
+      
+          .footer-heading {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+      
+          .footer-text {
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+          }
+      
+          .newsletter-box {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
+          }
+      
+          .newsletter-box:hover {
+            transform: translateY(-5px);
+          }
+      
+          .footer-input {
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: 2px solid rgba(255,255,255,0.2);
+            width: 100%;
+            margin-bottom: 1rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+          }
+      
+          .footer-input:hover {
+            border-color: rgba(255,255,255,0.4);
+          }
+      
+          .footer-button {
+            background: #67B82D;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(103, 184, 45, 0.3);
+          }
+      
+          .footer-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(103, 184, 45, 0.4);
+          }
+      
+          .portal-links {
+            display: grid;
+            gap: 1.25rem;
+          }
+      
+          .portal-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+          }
+      
+          .portal-link:hover {
+            transform: translateX(10px);
+            background: rgba(255,255,255,0.2);
+          }
+      
+          .portal-icon {
+            background: rgba(255,255,255,0.15);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 1.25rem;
+          }
+      
+          .portal-title {
+            font-weight: 600;
+          }
+      
+          .portal-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+          }
+      
+          .updates-box {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            height: 100%;
+            min-height: 200px;
+          }
+      
+          .updates-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+          }
+      
+          .updates-title {
+            font-weight: 600;
+          }
+      
+          .updates-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+          }
+      
+          .updates-content {
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+          }
+      
+          .footer-bottom {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            padding: 2rem 2rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+          }
+      
+          .footer-bottom p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+          }
+      
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+      
+          input::placeholder {
+            color: rgba(255,255,255,0.6);
+          }
+      
+          /* Tablet Styles */
+          @media (max-width: 1024px) {
+            .footer-grid {
+              grid-template-columns: repeat(2, 1fr);
+              gap: 3rem;
+              padding: 0 1.5rem;
+            }
+      
+            .footer-heading {
+              font-size: 1.5rem;
+            }
+      
+            .footer-text {
+              font-size: 1rem;
+            }
+          }
+      
+          /* Small Tablet Styles */
+          @media (max-width: 768px) {
+            .footer-section {
+              padding: 4rem 0 3rem;
+            }
+      
+            .footer-grid {
+              grid-template-columns: 1fr;
+              gap: 2.5rem;
+            }
+      
+            .newsletter-box,
+            .updates-box {
+              padding: 1.25rem;
+            }
+      
+            .portal-link:hover {
+              transform: translateX(5px);
+            }
+          }
+      
+          /* Mobile Styles */
+          @media (max-width: 480px) {
+            .footer-section {
+              padding: 3rem 0 2rem;
+            }
+      
+            .footer-grid {
+              padding: 0 1rem;
+              gap: 2rem;
+            }
+      
+            .footer-heading {
+              font-size: 1.25rem;
+              margin-bottom: 1rem;
+            }
+      
+            .footer-text {
+              font-size: 0.95rem;
+              margin-bottom: 1.5rem;
+            }
+      
+            .footer-input,
+            .footer-button {
+              padding: 0.875rem;
+              font-size: 0.95rem;
+            }
+      
+            .portal-link {
+              padding: 0.875rem;
+            }
+      
+            .portal-icon {
+              padding: 0.5rem;
+              font-size: 1rem;
+            }
+      
+            .portal-subtitle {
+              font-size: 0.85rem;
+            }
+      
+            .footer-bottom {
+              margin-top: 3rem;
+              padding: 1.5rem 1rem 0;
+            }
+      
+            .footer-bottom p {
+              font-size: 0.95rem;
+            }
+          }
+        </style>
+      </div>
+   
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuButton.addEventListener('click', function(event) {
+                event.stopPropagation();
+                this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        
+            // Close menu when clicking on a link
+            const navLinksItems = document.querySelectorAll('.nav-links a');
+            navLinksItems.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuButton.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navLinks.contains(event.target);
+                const isClickOnButton = mobileMenuButton.contains(event.target);
+                
+                if (!isClickInsideNav && !isClickOnButton) {
+                    mobileMenuButton.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        </script>
+</body>
+</html>

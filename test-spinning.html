@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.process-section {
+    padding: 6rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(240,244,252,0.95) 0%, rgba(245,251,240,0.95) 100%);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(54, 105, 201, 0.15);
+    perspective: 1500px;
+    position: relative;
+    overflow: hidden;
+}
+
+.process-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(54, 105, 201, 0.03) 100%);
+    animation: pulseBackground 8s infinite;
+}
+
+@keyframes pulseBackground {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 4rem;
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #3669C9, #5A8AE4, #3669C9);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 6s infinite linear;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+.process-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    position: relative;
+    padding: 2rem;
+    transform-style: preserve-3d;
+}
+
+.process-step-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.process-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(54, 105, 201, 0.1);
+    backdrop-filter: blur(10px);
+    transform-style: preserve-3d;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.process-step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 0%, rgba(54, 105, 201, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.process-step:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(54, 105, 201, 0.2);
+}
+
+.process-step:hover::before {
+    opacity: 1;
+}
+
+.step-circle {
+    width: 140px;
+    height: 140px;
+    background: conic-gradient(from 0deg, #3669C9, #5A8AE4, #3669C9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: relative;
+    transition: all 0.5s ease;
+    box-shadow: 0 15px 30px rgba(54, 105, 201, 0.2);
+    animation: rotateConic 8s infinite linear;
+}
+
+@keyframes rotateConic {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.step-circle::after {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-number {
+    font-size: 2.8rem;
+    color: #3669C9;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.step-title {
+    font-size: 1.6rem;
+    color: #2D3748;
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.step-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3669C9, #5A8AE4);
+    transition: width 0.3s ease;
+}
+
+.process-step:hover .step-title::after {
+    width: 50%;
+}
+
+.step-description {
+    color: #4A5568;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.process-step:hover .step-description {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 1200px) {
+    .process-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .process-container {
+        grid-template-columns: 1fr;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+    .process-step {
+        padding: 2rem;
+    }
+    .step-circle {
+        width: 120px;
+        height: 120px;
+    }
+}
+</style>
+</head>
+<body>
+
+<section class="process-section">
+    <h2 class="section-title">Our Process</h2>
+    <div class="process-container">
+        <a href="#understand" class="process-step-link">
+            <div class="process-step" data-step="1">
+                <div class="step-circle">
+                    <span class="step-number">1</span>
+                </div>
+                <h3 class="step-title">Understand</h3>
+                <p class="step-description">Get the exact information about fiscal requirements at a glance. We analyze your specific needs.</p>
+            </div>
+        </a>
+        
+        <a href="#develop" class="process-step-link">
+            <div class="process-step" data-step="2">
+                <div class="step-circle">
+                    <span class="step-number">2</span>
+                </div>
+                <h3 class="step-title">Develop</h3>
+                <p class="step-description">Choose optimal solution for fiscalization of your business and implement seamlessly into your workflow.</p>
+            </div>
+        </a>
+        
+        <a href="#operate" class="process-step-link">
+            <div class="process-step" data-step="3">
+                <div class="step-circle">
+                    <span class="step-number">3</span>
+                </div>
+                <h3 class="step-title">Operate</h3>
+                <p class="step-description">Ensure the right fiscal data and functionalities for smooth daily activities with our advanced tools.</p>
+            </div>
+        </a>
+        
+        <a href="#stay-informed" class="process-step-link">
+            <div class="process-step" data-step="4">
+                <div class="step-circle">
+                    <span class="step-number">4</span>
+                </div>
+                <h3 class="step-title">Stay Informed</h3>
+                <p class="step-description">Get unlimited access to the latest fiscal information across the globe with real-time updates.</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const steps = document.querySelectorAll('.process-step');
+    
+    // Intersection Observer for fade-in effect
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                // Start the circle rotation when visible
+                const circle = entry.target.querySelector('.step-circle');
+                if (circle) {
+                    circle.style.animationPlayState = 'running';
+                }
+            }
+        });
+    }, { threshold: 0.2 });
+    
+    // Initialize steps
+    steps.forEach((step, index) => {
+        step.style.opacity = '0';
+        step.style.transform = 'translateY(30px)';
+        step.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        step.style.transitionDelay = `${index * 0.2}s`;
+        observer.observe(step);
+    });
+    
+    // Smooth scroll with easing
+    document.querySelectorAll('.process-step-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const targetPosition = targetElement.offsetTop;
+                window.scrollTo({
+                    top: targetPosition - 100,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>

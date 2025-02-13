@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Base Section & Background */
+    .laptop-receipt-section {
+      padding: 8rem 2rem;
+      background: linear-gradient(135deg, #f0f4fc 0%, #f5fbf0 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1500px;
+      overflow: hidden;
+      position: relative;
+    }
+    .background-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .shape {
+      position: absolute;
+      background: linear-gradient(45deg, rgba(54, 105, 201, 0.1), rgba(103, 184, 45, 0.1));
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+    .shape:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: -150px;
+      left: -150px;
+    }
+    .shape:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      bottom: -200px;
+      right: -200px;
+      animation-delay: -5s;
+    }
+    .shape:nth-child(3) {
+      width: 200px;
+      height: 200px;
+      top: 50%;
+      right: 10%;
+      animation-delay: -7s;
+    }
+    @keyframes float {
+      0% { transform: rotate(0deg) translate(50px) rotate(0deg); }
+      100% { transform: rotate(360deg) translate(50px) rotate(-360deg); }
+    }
+
+    /* Container & Headings */
+    .laptop-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .section-title {
+      color: #3669C9;
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      animation: fadeInDown 1s ease-out;
+    }
+    .section-subtitle {
+      color: #4A5568;
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    /* Laptop & Screen */
+    .laptop {
+      position: relative;
+      width: 900px;
+      margin: 0 auto;
+      transform-style: preserve-3d;
+      transform: rotateX(12deg) rotateY(0deg);
+      animation: laptopEntrance 1.5s cubic-bezier(0.23, 1, 0.32, 1),
+                 subtleTilt 5s ease-in-out infinite alternate;
+      transition: transform 0.5s ease;
+      filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.25));
+    }
+    @keyframes laptopEntrance {
+      0% {
+        opacity: 0;
+        transform: rotateX(25deg) rotateY(10deg) translateY(100px) scale(0.95);
+      }
+      60% {
+        opacity: 0.7;
+        transform: rotateX(15deg) rotateY(-5deg) translateY(20px) scale(1.02);
+      }
+      100% {
+        opacity: 1;
+        transform: rotateX(12deg) rotateY(0deg) translateY(0) scale(1);
+      }
+    }
+    @keyframes subtleTilt {
+      from { transform: rotateX(12deg) rotateY(0deg); }
+      to   { transform: rotateX(12deg) rotateY(3deg); }
+    }
+
+    .laptop-screen {
+      background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+      border-radius: 20px 20px 0 0;
+      padding: 20px;
+      position: relative;
+      height: 560px;
+      border: 2px solid #3a3a3a;
+      box-shadow: 
+        0 0 0 2px rgba(255, 255, 255, 0.05),
+        inset 0 0 30px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+    .laptop-screen::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background: #444;
+      border-radius: 50%;
+      box-shadow: 
+        0 0 0 2px rgba(255, 255, 255, 0.1),
+        0 0 8px rgba(255, 255, 255, 0.2);
+    }
+    /* Screen Edge Highlights */
+    .laptop-screen::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 20px 20px 0 0;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 50%
+      );
+      pointer-events: none;
+    }
+
+    /* Animated Glare */
+    .screen-glare {
+      position: absolute;
+      top: -100%;
+      left: -100%;
+      width: 300%;
+      height: 300%;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.02) 50%,
+        rgba(255, 255, 255, 0.05) 100%
+      );
+      pointer-events: none;
+      border-radius: 20px 20px 0 0;
+      mix-blend-mode: soft-light;
+      animation: glareAnimation 6s linear infinite;
+    }
+    @keyframes glareAnimation {
+      0% {
+        transform: translate(0%, 0%) rotate(0deg);
+      }
+      100% {
+        transform: translate(20%, 20%) rotate(45deg);
+      }
+    }
+
+    .laptop-keyboard {
+      background: linear-gradient(to bottom, #e8e8e8, #d0d0d0);
+      height: 25px;
+      margin-top: -1px;
+      border-radius: 0 0 20px 20px;
+      position: relative;
+      transform-origin: top;
+      box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        inset 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .laptop-keyboard::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.05) 45%,
+        rgba(255, 255, 255, 0) 50%,
+        rgba(255, 255, 255, 0.05) 55%,
+        rgba(255, 255, 255, 0.1)
+      );
+    }
+    .laptop-keyboard::after {
+      content: '';
+      position: absolute;
+      width: 140px;
+      height: 8px;
+      background: #b4b4b4;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 4px;
+      box-shadow: 
+        inset 0 -2px 4px rgba(0, 0, 0, 0.1),
+        0 1px 2px rgba(255, 255, 255, 0.3);
+    }
+    /* Reflection under the laptop */
+    .laptop::after {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: 5%;
+      right: 5%;
+      height: 40px;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 60%);
+      filter: blur(5px);
+      transform: rotateX(60deg) scaleY(0.4);
+    }
+
+    /* Receipt Styles & Interactions */
+    .receipt-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 75%;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .receipt-container:hover {
+      transform: translate(-50%, -60%) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    .receipt-image {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    .receipt-details {
+      margin-top: 20px;
+      text-align: left;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(54, 105, 201, 0.05), rgba(103, 184, 45, 0.05));
+      border-radius: 12px;
+      border: 1px solid rgba(54, 105, 201, 0.1);
+    }
+    .receipt-details h3 {
+      color: #3669C9;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .receipt-details p {
+      color: #4A5568;
+      margin: 8px 0;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed rgba(74, 85, 104, 0.2);
+      padding-bottom: 8px;
+    }
+    .action-buttons {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    .receipt-container:hover .action-buttons {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .action-button {
+      background: linear-gradient(135deg, #3669C9, #5A8AE4);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 5px 15px rgba(54, 105, 201, 0.3);
+    }
+    .action-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(54, 105, 201, 0.4);
+      background: linear-gradient(135deg, #4075D5, #6596F0);
+    }
+
+    /* Fade-In Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="laptop-receipt-section">
+    <div class="background-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    
+    <div class="laptop-container">
+      <h2 class="section-title">Digital Receipt Viewer</h2>
+      <p class="section-subtitle">View and manage your receipts with ease</p>
+      
+      <div class="laptop">
+        <div class="laptop-screen">
+          <div class="screen-glare"></div>
+          <div class="receipt-container">
+            <img src="img/receipt.png" alt="Fiscal Receipt" class="receipt-image">
+            <div class="action-buttons">
+              <button class="action-button" onclick="viewReceipt(event)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                View Details
+              </button>
+              <button class="action-button" onclick="downloadReceipt(event)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download PDF
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="laptop-keyboard"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const laptop = document.querySelector('.laptop');
+      const receipt = document.querySelector('.receipt-container');
+      
+      // Smooth motion tracking with lerp
+      let currentRotateX = 12;
+      let currentRotateY = 0;
+      let targetRotateX = 12;
+      let targetRotateY = 0;
+
+      // Lerp function for smooth interpolation
+      function lerp(start, end, factor) {
+        return start + (end - start) * factor;
+      }
+
+      // Animate function using requestAnimationFrame
+      function animate() {
+        currentRotateX = lerp(currentRotateX, targetRotateX, 0.1);
+        currentRotateY = lerp(currentRotateY, targetRotateY, 0.1);
+        // Apply the parallax rotation on top of the subtle tilt animation.
+        laptop.style.transform = `rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg)`;
+        requestAnimationFrame(animate);
+      }
+      
+      // Start animation loop
+      animate();
+
+      // Enhanced parallax effect
+      document.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+        
+        // Calculate rotation with damping
+        const moveX = ((clientX - innerWidth / 2) / innerWidth) * 15;
+        const moveY = ((clientY - innerHeight / 2) / innerHeight) * 10;
+        
+        targetRotateX = 12 - moveY;
+        targetRotateY = moveX;
+      });
+      
+      // Smooth reset on mouse leave
+      document.addEventListener('mouseleave', () => {
+        targetRotateX = 12;
+        targetRotateY = 0;
+      });
+      
+      // Enhanced receipt interaction
+      let isDragging = false;
+      let startY, startX;
+      
+      // Add touch support
+      receipt.addEventListener('touchstart', handleDragStart);
+      receipt.addEventListener('mousedown', handleDragStart);
+      
+      document.addEventListener('touchmove', handleDragMove);
+      document.addEventListener('mousemove', handleDragMove);
+      
+      document.addEventListener('touchend', handleDragEnd);
+      document.addEventListener('mouseup', handleDragEnd);
+
+      function handleDragStart(e) {
+        isDragging = true;
+        receipt.style.transition = 'none';
+        startY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+        startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+      }
+
+      function handleDragMove(e) {
+        if (!isDragging) return;
+        
+        let currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+        let currentY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+        
+        const deltaY = (currentY - startY) * 0.05;
+        const deltaX = (currentX - startX) * 0.05;
+        
+        // Limit movement range
+        const newTranslateY = Math.max(-70, Math.min(-30, -50 + deltaY));
+        const newTranslateX = Math.max(-60, Math.min(-40, -50 + deltaX));
+        
+        receipt.style.transform = `translate(${newTranslateX}%, ${newTranslateY}%) scale(1.02)`;
+      }
+
+      function handleDragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        receipt.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+        receipt.style.transform = 'translate(-50%, -50%) scale(1)';
+      }
+    });
+
+    // Enhanced button interactions
+    function viewReceipt(event) {
+      const button = event.currentTarget;
+      button.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        button.style.transform = 'none';
+        alert('Opening receipt viewer...');
+      }, 150);
+    }
+
+    function downloadReceipt(event) {
+      const button = event.currentTarget;
+      button.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        button.style.transform = 'none';
+        alert('Downloading receipt...');
+      }, 150);
+    }
+  </script>
+</body>
+</html>

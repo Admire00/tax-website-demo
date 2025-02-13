@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Fiscal Gateway</title>
+    <style>
+        :root {
+            --primary-blue: #3669C9;
+            --primary-light: #EBF2FF;
+            --secondary-blue: #5A8AE4;
+            --secondary-green: #67B82D;
+            --text-dark: #1A202C;
+            --text-gray: #4A5568;
+            --background-light: #F7FAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f4fc 0%, #f5fbf0 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary-blue), #5A8AE4);
+            clip-path: polygon(0 0, 100% 0, 100% 60%, 0% 100%);
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.05em;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: 2rem;
+      }
+      
+      .nav-links a {
+          color: white;
+          text-decoration: none;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          position: relative;
+      }
+      
+      .nav-links a::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: -5px;
+          left: 50%;
+          background-color: white;
+          transition: all 0.3s ease;
+      }
+      
+      .nav-links a:hover::after {
+          width: 100%;
+          left: 0;
+      }
+
+      /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 100;
+  }
+  
+  /* Animations */
+  @keyframes slideUp {
+      from {
+          opacity: 0;
+          transform: translateY(20px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+  
+  @keyframes slideIn {
+      from {
+          opacity: 0;
+          transform: translateX(20px);
+      }
+      to {
+          opacity: 1;
+          transform: translateX(0);
+      }
+  }
+  
+  /* Tablet Styles */
+  @media (max-width: 1024px) {
+      .hero-content {
+          gap: 2rem;
+          padding: 1rem;
+      }
+  
+      .hero-text h1 {
+          font-size: 2.8rem;
+      }
+  
+      .hero-text p {
+          font-size: 1.1rem;
+      }
+  
+      .nav-links {
+          gap: 1.5rem;
+      }
+  }
+  
+  /* Small Tablet Styles */
+  @media (max-width: 768px) {
+      .hero-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 3rem;
+      }
+  
+      .hero-image {
+          order: -1;
+          max-width: 80%;
+          margin: 0 auto;
+      }
+  
+      .hero-text h1 {
+          font-size: 2.5rem;
+      }
+  
+      .header {
+          padding: 1.5rem;
+      }
+  
+      .nav-links {
+          display: none;
+      }
+  
+      .mobile-menu-btn {
+          display: block;
+      }
+  
+      /* Mobile Navigation */
+      .nav-links.active {
+          display: flex;
+          flex-direction: column;
+          position: fixed;
+          top: 0;
+          right: 0;
+          height: 100vh;
+          width: 250px;
+          background: var(--primary-blue);
+          padding: 80px 2rem 2rem;
+          gap: 2rem;
+          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      }
+  }
+  
+  /* Mobile Styles */
+  @media (max-width: 480px) {
+      .hero {
+          padding: 1rem;
+      }
+  
+      .header {
+          padding: 1rem;
+      }
+  
+      .logo svg {
+          width: 36px;
+          height: 36px;
+      }
+  
+      .logo-text {
+          font-size: 1.2rem;
+      }
+  
+      .hero-text h1 {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+      }
+  
+      .hero-text p {
+          font-size: 1rem;
+          margin-bottom: 1.5rem;
+      }
+  
+      .cta-button {
+          padding: 0.8rem 1.5rem;
+          font-size: 0.9rem;
+      }
+  
+      .hero-image {
+          max-width: 100%;
+      }
+  }
+  
+  /* Support for larger screens */
+  @media (min-width: 1440px) {
+      .hero-content {
+          max-width: 1400px;
+      }
+  
+      .hero-text h1 {
+          font-size: 4rem;
+      }
+  
+      .hero-text p {
+          font-size: 1.4rem;
+      }
+  }
+
+        body {
+            background: linear-gradient(135deg, #f0f4fc 0%, #f5fbf0 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary-blue), #5A8AE4);
+            clip-path: polygon(0 0, 100% 0, 100% 60%, 0% 100%);
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.05em;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .pricing-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .pricing-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .price-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-card.popular {
+            border: 2px solid var(--secondary-green);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 1rem;
+            right: -2rem;
+            background: var(--secondary-green);
+            color: white;
+            padding: 0.5rem 3rem;
+            transform: rotate(45deg);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .price-period {
+            color: var(--text-gray);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin: 1rem 0;
+        }
+
+        .price span {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+        }
+
+        .features {
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text-gray);
+        }
+
+        .feature-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+            fill: var(--secondary-green);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(54, 105, 201, 0.2);
+        }
+
+        @media (max-width: 968px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .pricing-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        
+    </style>
+</head>
+<body>
+   <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg viewBox="0 0 200 150">
+                    <path d="M100 30 C60 30, 30 60, 30 100" fill="white" />
+                    <path d="M100 30 C140 30, 170 60, 170 100" fill="#67B82D" />
+                </svg>
+                <span class="logo-text">Fiscal Gateway</span>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+            <nav class="nav-links">
+              <a href="newmain.html">Home</a>
+              <a href="services.html">Services</a>
+              <a href="pricing.html">Pricing</a>
+              <a href="contact.html">Contact</a>
+              <a href="login.html">Login</a>
+              <a href="signup.html">Signup</a>
+          </nav>
+        </header>
+
+        <div class="pricing-header">
+            <h1>Simple, transparent pricing</h1>
+            <p>Choose the plan that works best for your business</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Quarterly Plan -->
+            <div class="price-card">
+                <div class="price-period">Quarterly</div>
+                <div class="price">$45<span>/device</span></div>
+                <div class="features">
+                    <div class="feature-item">
+                        <svg viewBox="0 0 20 20">
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                        <span>3 months access</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg viewBox="0 0 20 20">
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                        <span>Full feature access</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg viewBox="0 0 20 20">
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                        <span>Email support</span>
+                    </div>
+                </div>
+                <button class="cta-button">Get Started</button>
+            </div>
+
+            <!-- Semi-Annual Plan -->
+            <div class="price-card popular">
+                <div class="popular-badge">Popular</div>
+                <div class="price-period">Semi-Annual</div>
+                <div class="price">$85<span>/device</span></div>
+                <div class="features">
+                    <div class="feature-item">
+                        <svg viewBox="0 0 20 20">
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                        <span>6 months access</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg viewBox="0 0 20 20">
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                        <span>Priority support</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg viewBox="0 0 20 20">
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                        <span>Additional features</span>
+                    </div>
+                </div>
+                <button class="cta-button">Get Started</button>
+            </div>
+
+            <!-- Annual Plan -->
+            <div class="price-card">
+                <div class="price-period">Annual</div>
+                <div class="price">$170<span>/device</span></div>
+                <div class="features">
+                    <div class="feature-item">
+                        <svg viewBox="0 0 20 20">
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                        <span>12 months access</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg viewBox="0 0 20 20">
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                        <span>24/7 Premium support</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg viewBox="0 0 20 20">
+                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                        </svg>
+                        <span>Best value package</span>
+                    </div>
+                </div>
+                <button class="cta-button">Get Started</button>
+            </div>
+        </div>
+    </div>
+
+  
+<div class="footer-section">
+  <!-- Background Pattern -->
+  <div class="footer-background"></div>
+
+  <div class="footer-grid">
+    <!-- About Us Section -->
+    <div class="footer-column">
+      <h3 class="footer-heading">About us</h3>
+      <p class="footer-text">Fiscal Gateway is a leading provider of financial solutions and technical services, empowering modern businesses to achieve their financial goals.</p>
+      <div class="newsletter-box">
+        <input type="email" placeholder="Enter Your Email" class="footer-input">
+        <button class="footer-button">Subscribe to Newsletter</button>
+      </div>
+    </div>
+
+    <!-- Fiscal Portal Section -->
+    <div class="footer-column">
+      <h3 class="footer-heading">Fiscal Portal</h3>
+      <div class="portal-links">
+        <a href="#" class="portal-link">
+          <span class="portal-icon">🔔</span>
+          <div class="portal-text">
+            <div class="portal-title">Alerts</div>
+            <div class="portal-subtitle">Stay updated with notifications</div>
+          </div>
+        </a>
+        <a href="#" class="portal-link">
+          <span class="portal-icon">📰</span>
+          <div class="portal-text">
+            <div class="portal-title">News</div>
+            <div class="portal-subtitle">Latest financial updates</div>
+          </div>
+        </a>
+        <a href="#" class="portal-link">
+          <span class="portal-icon">📑</span>
+          <div class="portal-text">
+            <div class="portal-title">Documents</div>
+            <div class="portal-subtitle">Access important files</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Latest Updates Section -->
+    <div class="footer-column">
+      <h3 class="footer-heading">Latest updates</h3>
+      <div class="updates-box">
+        <div class="updates-header">
+          <div class="updates-title">@FiscalGateway</div>
+          <div class="updates-subtitle">Follow us for updates</div>
+        </div>
+        <div class="updates-content">
+          Stay connected with our latest news and updates
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <p>© 2025 Fiscal Gateway. All Rights Reserved.</p>
+  </div>
+
+  <style>
+    .footer-section {
+      background: linear-gradient(135deg, #3669C9, #5A8AE4);
+      color: white;
+      padding: 6rem 0 4rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: radial-gradient(circle at 100% 100%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.1) 0%, transparent 50%);
+      opacity: 0.6;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-column {
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .footer-heading {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer-text {
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .newsletter-box {
+      background: rgba(255,255,255,0.1);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .newsletter-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .footer-input {
+      padding: 1rem;
+      border-radius: 0.75rem;
+      border: 2px solid rgba(255,255,255,0.2);
+      width: 100%;
+      margin-bottom: 1rem;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .footer-input:hover {
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    .footer-button {
+      background: #67B82D;
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(103, 184, 45, 0.3);
+    }
+
+    .footer-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(103, 184, 45, 0.4);
+    }
+
+    .portal-links {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .portal-link {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .portal-link:hover {
+      transform: translateX(10px);
+      background: rgba(255,255,255,0.2);
+    }
+
+    .portal-icon {
+      background: rgba(255,255,255,0.15);
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 1.25rem;
+    }
+
+    .portal-title {
+      font-weight: 600;
+    }
+
+    .portal-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .updates-box {
+      background: rgba(255,255,255,0.1);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      height: 100%;
+      min-height: 200px;
+    }
+
+    .updates-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .updates-title {
+      font-weight: 600;
+    }
+
+    .updates-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .updates-content {
+      padding: 1rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 4rem auto 0;
+      padding: 2rem 2rem 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-bottom p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Tablet Styles */
+    @media (max-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        padding: 0 1.5rem;
+      }
+
+      .footer-heading {
+        font-size: 1.5rem;
+      }
+
+      .footer-text {
+        font-size: 1rem;
+      }
+    }
+
+    /* Small Tablet Styles */
+    @media (max-width: 768px) {
+      .footer-section {
+        padding: 4rem 0 3rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .newsletter-box,
+      .updates-box {
+        padding: 1.25rem;
+      }
+
+      .portal-link:hover {
+        transform: translateX(5px);
+      }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 480px) {
+      .footer-section {
+        padding: 3rem 0 2rem;
+      }
+
+      .footer-grid {
+        padding: 0 1rem;
+        gap: 2rem;
+      }
+
+      .footer-heading {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .footer-text {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .footer-input,
+      .footer-button {
+        padding: 0.875rem;
+        font-size: 0.95rem;
+      }
+
+      .portal-link {
+        padding: 0.875rem;
+      }
+
+      .portal-icon {
+        padding: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .portal-subtitle {
+        font-size: 0.85rem;
+      }
+
+      .footer-bottom {
+        margin-top: 3rem;
+        padding: 1.5rem 1rem 0;
+      }
+
+      .footer-bottom p {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</div> 
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  input::placeholder {
+    color: rgba(255,255,255,0.6);
+  }
+  
+  @media (max-width: 968px) {
+    .container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>
+</div>
+</body>
+</html>

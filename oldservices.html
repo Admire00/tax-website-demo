@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiscal Gateway - Advanced Services</title>
+    <style>
+        :root {
+            --primary-blue: #3669C9;
+            --secondary-green: #67B82D;
+            --gradient-blue: linear-gradient(135deg, #3669C9, #5A8AE4);
+            --text-dark: #1A202C;
+            --text-gray: #4A5568;
+            --background-light: #F7FAFC;
+            --hover-transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f4fc 0%, #f5fbf0 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .services-hero {
+            background: var(--gradient-blue);
+            color: white;
+            border-radius: 1.5rem;
+            padding: 5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(54, 105, 201, 0.25);
+        }
+
+        .services-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 10s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); }
+            100% { transform: scale(1.1); }
+        }
+
+        .services-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            position: relative;
+            z-index: 2;
+        }
+
+        .services-hero p {
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .advanced-services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(54, 105, 201, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(54, 105, 201, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 35px 60px -15px rgba(54, 105, 201, 0.2);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            color: var(--primary-blue);
+            margin: 0 auto 1.5rem;
+            stroke-width: 1.5;
+        }
+
+        .service-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-breakdown {
+            perspective: 1000px;
+            background: linear-gradient(135deg, #f0f4fc 0%, #f5fbf0 100%);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(54, 105, 201, 0.15);
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 3rem;
+        }
+
+        .breakdown-item {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: var(--hover-transition);
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(54, 105, 201, 0.1);
+        }
+
+        .breakdown-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(54, 105, 201, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: var(--hover-transition);
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .breakdown-item:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(54, 105, 201, 0.15);
+        }
+
+        .breakdown-item:hover::before {
+            opacity: 1;
+        }
+
+        .breakdown-item h4 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .breakdown-item h4::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary-blue);
+            transform: scaleX(0);
+            transition: var(--hover-transition);
+        }
+
+        .breakdown-item:hover h4::after {
+            transform: scaleX(1);
+        }
+
+        .breakdown-item ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .breakdown-item li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: var(--hover-transition);
+        }
+
+        .breakdown-item li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-green);
+            transition: var(--hover-transition);
+        }
+
+        .breakdown-item:hover li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .breakdown-item li:nth-child(1) { transition-delay: 0.1s; }
+        .breakdown-item li:nth-child(2) { transition-delay: 0.2s; }
+        .breakdown-item li:nth-child(3) { transition-delay: 0.3s; }
+        .breakdown-item li:nth-child(4) { transition-delay: 0.4s; }
+        .breakdown-item li:nth-child(5) { transition-delay: 0.5s; }
+        .breakdown-item li:nth-child(6) { transition-delay: 0.6s; }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .cta-button:hover {
+            background: #2859B9;
+            transform: translateY(-3px);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(54, 105, 201, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3669C9;
+            letter-spacing: -0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4A5568;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #3669C9;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #3669C9;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg viewBox="0 0 200 150">
+                    <path d="M100 30 C60 30, 30 60, 30 100" fill="#3669C9" />
+                    <path d="M100 30 C140 30, 170 60, 170 100" fill="#67B82D" />
+                </svg>
+                <span class="logo-text">Fiscal Gateway</span>
+            </div>
+            <nav class="nav-links">
+                <a href="newmain.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html">Login</a>
+                <a href="signup.html">Signup</a>
+            </nav>
+        </header>
+
+    <div class="container">
+        <section class="services-hero">
+            <h1>Unleash Financial Precision</h1>
+            <p>Dive deep into our comprehensive suite of advanced financial services designed to transform complex challenges into strategic opportunities for sustainable growth.</p>
+        </section>
+
+        <section class="advanced-services">
+            <div class="service-card">
+                <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                    <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                </svg>
+                <h3>Strategic Analytics</h3>
+                <p>Advanced data modeling and predictive financial forecasting to guide critical business decisions.</p>
+            </div>
+            <div class="service-card">
+                <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 01-4.176-4.176l-.477-2.387a2 2 0 00-.547-1.022L9.89 4.06a2 2 0 00-1.414-.586H7.021a2 2 0 00-1.873 1.311l-.958 2.694a2 2 0 00.54 2.262l5.708 5.708a2 2 0 002.262.54l2.694-.958a2 2 0 001.311-1.873v-1.455a2 2 0 00-.586-1.414z" />
+                </svg>
+                <h3>Risk Management</h3>
+                <p>Comprehensive risk assessment and mitigation strategies tailored to your unique business ecosystem.</p>
+            </div>
+            <div class="service-card">
+                <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <h3>Compliance Shield</h3>
+                <p>Proactive regulatory monitoring and adaptive compliance frameworks for dynamic business landscapes.</p>
+            </div>
+        </section>
+
+       
+    
+<head>
+  <style>
+    :root {
+      --primary-blue: #3669C9;
+      --secondary-green: #67B82D;
+      --text-dark: #1A202C;
+      --text-gray: #4A5568;
+      --background-light: #F7FAFC;
+    }
+
+    .integration-section {
+      background-color: var(--background-light);
+      padding: 60px 0;
+    }
+
+    .integration-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 40px;
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .integration-item {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .integration-item::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(54, 105, 201, 0.05), transparent);
+      transform: rotate(45deg);
+      transition: all 0.5s ease;
+      opacity: 0;
+    }
+
+    .integration-item:hover::before {
+      opacity: 1;
+    }
+
+    .integration-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .integration-item img {
+      max-width: 80px;
+      margin-bottom: 24px;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    .integration-item h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: var(--primary-blue);
+    }
+
+    .integration-item p {
+      font-size: 15px;
+      color: var(--text-gray);
+    }
+    .section-title {
+      text-align: center;
+      color: var(--text-dark);
+      margin-bottom: 40px;
+    }
+
+    .integration-description {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      text-align: center;
+      color: var(--text-gray);
+    }
+  </style>
+</head>
+<body>
+  <section class="integration-section">
+    <div class="container">
+        <h2 class="section-title">Fiscal Integrations</h2>
+        <p class="integration-description">
+          At our company, we pride ourselves on our comprehensive fiscal integrations with leading accounting systems. 
+          By seamlessly connecting our advanced financial services to platforms like 
+          Zoho Books, QuickBooks, Sage Pastel, Xero, and SAP Business One, we empower our clients to achieve unparalleled visibility, control, and strategic decision-making across their financial landscape.
+        </p>
+      <ul class="integration-list">
+        <li class="integration-item">
+          <img src="img/quickbooks.png" alt="QuickBooks">
+          <h3>QuickBooks</h3>
+          <p>Seamless integration with Intuit QuickBooks accounting software for streamlined financial management.</p>
+        </li>
+        <li class="integration-item">
+          <img src="img/excel.png" alt="Excel">
+          <h3>Excel</h3>
+          <p>Powerful Excel-based solutions for advanced financial analysis, reporting, and modeling.</p>
+        </li>
+        <li class="integration-item">
+          <img src="img/sagepastel.png" alt="Sage Pastel Accounting">
+          <h3>Sage Pastel Accounting</h3>
+          <p>Integration with the popular Sage Pastel accounting platform for comprehensive financial capabilities.</p>
+        </li>
+        <li class="integration-item">
+          <img src="img/sage1.png" alt="Sage One">
+          <h3>Sage One</h3>
+          <p>Connection with Sage One cloud-based accounting and business management software.</p>
+        </li>
+        <li class="integration-item">
+          <img src="img/sap.png" alt="SAP Business One">
+          <h3>SAP Business One</h3>
+          <p>Integration with the SAP Business One ERP system for end-to-end financial and operational control.</p>
+        </li>
+        <li class="integration-item">
+          <img src="img/zoho.png" alt="Zoho">
+          <h3>Zoho Books</h3>
+          <p>Coupling with Zoho Books accounting platform to enable real-time financial insights and automation.</p>
+        </li>
+      </ul>
+      <section class="cta-section">
+        <a href="fiscaldevice.html" class="cta-button">Start Your Fiscal Transformation</a>
+    </section>
+    </div>
+  </section>
+
+  <script>
+    const integrationItems = document.querySelectorAll('.integration-item');
+
+    integrationItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        item.classList.add('active');
+      });
+      item.addEventListener('mouseleave', () => {
+        item.classList.remove('active');
+      });
+    });
+  </script>
+
+
+<section class="service-breakdown">
+    <div class="breakdown-grid">
+        <div class="breakdown-item">
+            <h4>Deep-Dive Financial Diagnostics</h4>
+            <p>Comprehensive financial health assessments using AI-powered analytics to uncover hidden opportunities and potential risks.</p>
+        </div>
+        <div class="breakdown-item">
+            <h4>Technology-Enabled Solutions</h4>
+            <p>Cutting-edge technological integrations that streamline financial processes and enhance operational efficiency.</p>
+        </div>
+        <div class="breakdown-item">
+            <h4>Global Tax Strategy</h4>
+            <p>International tax optimization strategies designed to maximize financial efficiency across diverse regulatory environments.</p>
+        </div>
+        <div class="breakdown-item">
+            <h4>Device Installation and Support</h4>
+            <p>Personalized financial blueprints that align with your specific business goals and growth trajectory.</p>
+            <ul>
+                <li>Device Installation</li>
+                <li>Round the clock customer support</li>
+                <li>System Upgrades and Automation</li>
+                <li>Assistance on how best to manage business tax</li>
+            </ul>
+        </div>
+        <div class="breakdown-item tax-services">
+            <h4>Comprehensive Tax Services</h4>
+            <p>Expertise in managing diverse tax obligations including:</p>
+            <ul>
+                <li>Income Tax: Strategic tax planning for individuals and businesses</li>
+                <li>PAYE Management: Efficient employee tax withholding services</li>
+                <li>VAT Compliance: Indirect tax management and reporting</li>
+                <li>Presumptive Tax Services: Specialized support for informal sector traders</li>
+                <li>Capital Gains Tax Consultation</li>
+                <li>Withholding Tax Optimization</li>
+            </ul>
+        </div>
+        <div class="breakdown-item tax-services">
+            <h4>Tax Advisory Services</h4>
+            <p>We give a guideline to all our clients on how to comply with their taxes</p>
+            <ul>
+                <li>Income Tax: Strategic tax planning for individuals and businesses</li>
+                <li>PAYE Management: Efficient employee tax withholding services</li>
+                <li>VAT Compliance: Indirect tax management and reporting</li>
+                <li>Presumptive Tax Services: Specialized support for informal sector traders</li>
+                <li>Capital Gains Tax Consultation</li>
+                <li>Withholding Tax Optimization</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const breakdownItems = document.querySelectorAll('.breakdown-item');
+
+        breakdownItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-15px) rotateX(5deg) scale(1.02)';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0) rotateX(0) scale(1)';
+            });
+        });
+    });
+</script>  
+</div>
+<div style="
+background: linear-gradient(135deg, #3669C9, #5A8AE4);
+color: white;
+padding: 6rem 0 4rem;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+position: relative;
+overflow: hidden;
+">
+<!-- Background Pattern -->
+<div style="
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle at 100% 100%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 0% 0%, rgba(255,255,255,0.1) 0%, transparent 50%);
+  opacity: 0.6;
+"></div>
+
+<div style="
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+  position: relative;
+  z-index: 1;
+">
+  
+  <!-- About Us Section -->
+  <div style="animation: fadeIn 0.8s ease-out;">
+    <h3 style="
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    ">About us</h3>
+    <p style="
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+    ">Fiscal Gateway is a leading provider of financial solutions and technical services, empowering modern businesses to achieve their financial goals.</p>
+    <div style="
+      background: rgba(255,255,255,0.1);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: transform 0.3s ease;
+    " onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+      <input type="email" placeholder="Enter Your Email" style="
+        padding: 1rem;
+        border-radius: 0.75rem;
+        border: 2px solid rgba(255,255,255,0.2);
+        width: 100%;
+        margin-bottom: 1rem;
+        background: rgba(255,255,255,0.1);
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      " onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';">
+      <button style="
+        background: #67B82D;
+        color: white;
+        padding: 1rem;
+        border: none;
+        border-radius: 0.75rem;
+        cursor: pointer;
+        width: 100%;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(103, 184, 45, 0.3);
+      " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(103, 184, 45, 0.4)';" 
+         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(103, 184, 45, 0.3)';">
+        Subscribe to Newsletter
+      </button>
+    </div>
+  </div>
+
+  <!-- Fiscal Portal Section -->
+  <div style="animation: fadeIn 0.8s ease-out 0.2s;">
+    <h3 style="
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    ">Fiscal Portal</h3>
+    <div style="display: grid; gap: 1.25rem;">
+      <a href="#" style="
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.1);
+      " onmouseover="this.style.transform='translateX(10px)'; this.style.background='rgba(255,255,255,0.2)';" 
+         onmouseout="this.style.transform='translateX(0)'; this.style.background='rgba(255,255,255,0.1)';">
+        <span style="
+          background: rgba(255,255,255,0.15);
+          padding: 0.75rem;
+          border-radius: 0.5rem;
+          font-size: 1.25rem;
+        ">🔔</span>
+        <div>
+          <div style="font-weight: 600;">Alerts</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">Stay updated with notifications</div>
+        </div>
+      </a>
+      <a href="#" style="
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.1);
+      " onmouseover="this.style.transform='translateX(10px)'; this.style.background='rgba(255,255,255,0.2)';" 
+         onmouseout="this.style.transform='translateX(0)'; this.style.background='rgba(255,255,255,0.1)';">
+        <span style="
+          background: rgba(255,255,255,0.15);
+          padding: 0.75rem;
+          border-radius: 0.5rem;
+          font-size: 1.25rem;
+        ">📰</span>
+        <div>
+          <div style="font-weight: 600;">News</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">Latest financial updates</div>
+        </div>
+      </a>
+      <a href="#" style="
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.1);
+      " onmouseover="this.style.transform='translateX(10px)'; this.style.background='rgba(255,255,255,0.2)';" 
+         onmouseout="this.style.transform='translateX(0)'; this.style.background='rgba(255,255,255,0.1)';">
+        <span style="
+          background: rgba(255,255,255,0.15);
+          padding: 0.75rem;
+          border-radius: 0.5rem;
+          font-size: 1.25rem;
+        ">📑</span>
+        <div>
+          <div style="font-weight: 600;">Documents</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">Access important files</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Latest Updates Section -->
+  <div style="animation: fadeIn 0.8s ease-out 0.4s;">
+    <h3 style="
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    ">Latest updates</h3>
+    <div style="
+      background: rgba(255,255,255,0.1);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      height: 100%;
+      min-height: 200px;
+    ">
+      <div style="
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      ">
+        <div>
+          <div style="font-weight: 600;">@FiscalGateway</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">Follow us for updates</div>
+        </div>
+      </div>
+      <div style="
+        padding: 1rem;
+        background: rgba(255,255,255,0.05);
+        border-radius: 0.75rem;
+        margin-top: 1rem;
+      ">
+        Stay connected with our latest news and updates
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Bar -->
+<div style="
+  max-width: 1200px;
+  margin: 4rem auto 0;
+  padding: 2rem 2rem 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+">
+  <p style="
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.8);
+  ">© 2025 Fiscal Gateway. All Rights Reserved.</p>
+</div>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  input::placeholder {
+    color: rgba(255,255,255,0.6);
+  }
+  
+  @media (max-width: 968px) {
+    .container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>
+</div>
+</body>
+</html>

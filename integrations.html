@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Integrations - Fiscal Gateway</title>
+    <style>
+        :root {
+            --primary-blue: #3669C9;
+            --primary-light: #EBF2FF;
+            --secondary-blue: #5A8AE4;
+            --secondary-green: #67B82D;
+            --text-dark: #1A202C;
+            --text-gray: #4A5568;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f4fc 0%, #f5fbf0 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .integration-grid {
+            max-width: 1200px;
+            margin: -3rem auto 4rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        .integration-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .integration-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .integration-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--primary-light);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .integration-icon svg {
+            width: 32px;
+            height: 32px;
+            color: var(--primary-blue);
+        }
+
+        .integration-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .integration-card p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .integration-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .feature-tag {
+            background: var(--primary-light);
+            color: var(--primary-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+            margin-top: 4rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary-green);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(103, 184, 45, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .site-header {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .header {
+                padding: 6rem 1rem 3rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .integration-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .software-integrations {
+            background: var(--background-light);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            text-align: center;
+            transform-style: preserve-3d;
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .integration-item {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(54, 105, 201, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .integration-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(54, 105, 201, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .integration-item:hover::before {
+            opacity: 1;
+        }
+
+        .integration-item:hover {
+            transform: translateY(-15px) rotateX(5deg) scale(1.05);
+            box-shadow: 0 25px 50px rgba(54, 105, 201, 0.2);
+        }
+
+        .integration-item img {
+            max-width: 100px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .integration-item:hover img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.6s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: #2859B9;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a href="#" class="logo">
+            <svg viewBox="0 0 200 150">
+                <path d="M100 30 C60 30, 30 60, 30 100" fill="var(--primary-blue)" />
+                <path d="M100 30 C140 30, 170 60, 170 100" fill="var(--secondary-green)" />
+            </svg>
+            <span class="logo-text">Fiscal Gateway</span>
+        </a>
+        <nav class="nav-links">
+            <a href="newmain.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="signup.html">Signup</a>
+        </nav>
+    </header>
+
+    <div class="header">
+        <h1>Device Integrations</h1>
+        <p>Seamlessly connect your fiscal devices and systems with our comprehensive integration solutions</p>
+    </div>
+
+    <div class="integration-grid">
+        <div class="integration-card">
+            <div class="integration-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="4" y="4" width="16" height="16" rx="2"/>
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M16 8h.01"/>
+                </svg>
+            </div>
+            <h3>POS Systems</h3>
+            <p>Integrate with leading Point of Sale systems for seamless fiscal operations</p>
+            <div class="integration-features">
+                <span class="feature-tag">Real-time sync</span>
+                <span class="feature-tag">Multi-location</span>
+                <span class="feature-tag">Cloud backup</span>
+            </div>
+        </div>
+
+        <div class="integration-card">
+            <div class="integration-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/>
+                    <path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/>
+                    <path d="M18 12c0 1.1-.9 2-2 2H4"/>
+                </svg>
+            </div>
+            <h3>Fiscal Printers</h3>
+            <p>Connect with fiscal printers for compliant receipt generation and reporting</p>
+            <div class="integration-features">
+                <span class="feature-tag">Auto-detection</span>
+                <span class="feature-tag">Remote printing</span>
+                <span class="feature-tag">Status monitoring</span>
+            </div>
+        </div>
+
+        <div class="integration-card">
+            <div class="integration-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2"/>
+                    <path d="M8 21h8"/>
+                    <path d="M12 17v4"/>
+                </svg>
+            </div>
+            <h3>Payment Terminals</h3>
+            <p>Integrate with payment terminals for secure and compliant transactions</p>
+            <div class="integration-features">
+                <span class="feature-tag">EMV compliant</span>
+                <span class="feature-tag">NFC ready</span>
+                <span class="feature-tag">End-to-end encryption</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="software-integrations">
+        <h2>Accounting Software Integrations</h2>
+        <p>Seamless connections with leading accounting platforms to enhance your financial ecosystem</p>
+        
+        <div class="integration-grid">
+            <div class="integration-item">
+                <img src="img/quickbooks.png" alt="QuickBooks">
+                <h3>QuickBooks</h3>
+                <p>Complete financial management integration</p>
+            </div>
+            <div class="integration-item">
+                <img src="img/zoho.png" alt="Zoho Books">
+                <h3>Zoho Books</h3>
+                <p>Cloud-based accounting synchronization</p>
+            </div>
+            <div class="integration-item">
+                <img src="img/sagepastel.png" alt="Sage Pastel">
+                <h3>Sage Pastel</h3>
+                <p>Advanced financial reporting tools</p>
+            </div>
+            <div class="integration-item">
+                <img src="img/sap.png" alt="SAP Business One">
+                <h3>SAP Business One</h3>
+                <p>Enterprise resource planning integration</p>
+            </div>
+            <div class="integration-item">
+                <img src="img/excel.png" alt="Excel">
+                <h3>Microsoft Excel</h3>
+                <p>Advanced financial analysis support</p>
+            </div>
+            <div class="integration-item">
+                <img src="img/sage1.png" alt="Sage One">
+                <h3>Sage One</h3>
+                <p>Cloud accounting platform connection</p>
+            </div>
+        </div>
+    </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const supportCards = document.querySelectorAll('.support-card');
+        const integrationItems = document.querySelectorAll('.integration-item');
+        const hero = document.querySelector('.integration-hero');
+
+        // 3D Tilt Effect for Hero
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = -(x - centerX) / 20;
+
+            hero.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        hero.addEventListener('mouseleave', () => {
+            hero.style.transform = 'rotateX(0) rotateY(0)';
+        });
+
+        // Hover Effects for Support Cards
+        supportCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-15px) rotateX(5deg) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) rotateX(0) scale(1)';
+            });
+        });
+
+        // Hover Effects for Integration Items
+        integrationItems.forEach(item => {
+            const img = item.querySelector('img');
+            
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-15px) rotateX(5deg) scale(1.05)';
+                img.style.transform = 'scale(1.1) rotate(5deg)';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0) rotateX(0) scale(1)';
+                img.style.transform = 'scale(1) rotate(0)';
+            });
+        });
+    });
+</script>
+
+    <div class="cta-section">
+        <h2>Ready to Connect Your Devices?</h2>
+        <p>Get started with our integration solutions today</p>
+        <a href="#" class="cta-button">Contact Our Team</a>
+    </div>
+
+    <script>
+        // Add smooth scroll animation for cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.integration-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            cards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease-out';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiscal Gateway - Tax Compliance Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f4fc 0%, #f5fbf0 100%);
+            color: #1A202C;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f4fc 0%, #f5fbf0 100%);
+            color: #1A202C;
+            line-height: 1.6;
+        }
+        .radial-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            background: radial-gradient(600px circle at 80% 20%, rgba(54, 105, 201, 0.1), transparent 50%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(54, 105, 201, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3669C9;
+            letter-spacing: -0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4A5568;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: #3669C9;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #3669C9;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            color: #3669C9;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-description {
+            color: #4A5568;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 500px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #3669C9;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 10px 20px -10px rgba(54, 105, 201, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #2859B9;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -10px rgba(54, 105, 201, 0.4);
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 15px 30px -10px rgba(54, 105, 201, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 40px -15px rgba(54, 105, 201, 0.2);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1rem;
+            color: #3669C9;
+            stroke-width: 1.5;
+        }
+
+        .service-title {
+            color: #3669C9;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .footer {
+            background: #3669C9;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 1rem 1rem 0 0;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+
+        .search-bar {
+            width: 100%;
+            max-width: 600px;
+            padding: 1rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            box-shadow: 0 10px 20px -10px rgba(54, 105, 201, 0.1);
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 15px 30px -10px rgba(54, 105, 201, 0.1);
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #4A5568;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #3669C9;
+        }
+
+        .faq {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 20px -10px rgba(54, 105, 201, 0.1);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #F7FAFC;
+            cursor: pointer;
+            font-weight: 600;
+            color: #3669C9;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 1rem;
+            background: white;
+            color: #4A5568;
+        }
+
+        .newsletter {
+            background: #3669C9;
+            color: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 2rem auto 0;
+        }
+
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+
+        .newsletter-button {
+            background: #67B82D;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            cursor: pointer;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="radial-gradient"></div>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg viewBox="0 0 200 150">
+                    <path d="M100 30 C60 30, 30 60, 30 100" fill="#3669C9" />
+                    <path d="M100 30 C140 30, 170 60, 170 100" fill="#67B82D" />
+                </svg>
+                <span class="logo-text">Fiscal Gateway</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Services</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Simplify Your Financial Landscape</h1>
+                <p class="hero-description">
+                    Empower your business with intelligent tax management. Fiscal Gateway transforms complex financial challenges into strategic opportunities.
+                </p>
+                <a href="#" class="cta-button">Explore Solutions</a>
+            </div>
+            <div class="hero-image">
+                <svg viewBox="0 0 400 300" style="width: 100%; max-width: 500px;">
+                    <rect x="50" y="50" width="300" height="200" fill="#F3F4F6" rx="15" />
+                    <path d="M100 150 L150 100 L200 175 L250 125 L300 200" fill="none" stroke="#3669C9" stroke-width="4" />
+                    <circle cx="100" cy="150" r="10" fill="#67B82D" />
+                    <circle cx="150" cy="100" r="10" fill="#67B82D" />
+                    <circle cx="200" cy="175" r="10" fill="#67B82D" />
+                    <circle cx="250" cy="125" r="10" fill="#67B82D" />
+                    <circle cx="300" cy="200" r="10" fill="#67B82D" />
+                </svg>
+            </div>
+        </section>
+
+        <section class="services">
+            <div class="service-card">
+                <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z" />
+                </svg>
+                <h3 class="service-title">Tax Reporting</h3>
+                <p>Automated and precise tax reporting tailored to your business needs.</p>
+            </div>
+            <div class="service-card">
+                <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3 class="service-title">Financial Analysis</h3>
+                <p>Deep insights to optimize your financial strategy and tax efficiency.</p>
+            </div>
+            <div class="service-card">
+                <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3 class="service-title">Compliance Management</h3>
+                <p>Proactive tools to navigate complex regulatory landscapes.</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Search Bar Section -->
+            <section class="search-container">
+                <input type="text" class="search-bar" placeholder="Search for tax solutions, services, or information">
+            </section>
+    
+            <!-- Client Testimonials -->
+            <section class="testimonials">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Fiscal Gateway transformed our tax management process. Incredibly efficient and user-friendly!"</p>
+                    <p class="testimonial-author">- Sarah Johnson, CFO</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Their financial analysis is second to none. Saved us thousands in tax optimization."</p>
+                    <p class="testimonial-author">- Michael Chen, Startup Founder</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Compliance has never been easier. Fiscal Gateway is a game-changer for our business."</p>
+                    <p class="testimonial-author">- Emily Rodriguez, Business Owner</p>
+                </div>
+            </section>
+    
+            <!-- FAQ Section -->
+            <section class="faq">
+                <h2 style="text-align: center; color: #3669C9; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">What services does Fiscal Gateway offer?</div>
+                    <div class="faq-answer">We provide comprehensive tax reporting, financial analysis, and compliance management for businesses of all sizes.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How can Fiscal Gateway help my business?</div>
+                    <div class="faq-answer">We simplify tax compliance, provide strategic financial insights, and help you minimize tax liabilities through advanced analytics.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is my financial data secure?</div>
+                    <div class="faq-answer">Absolutely. We use state-of-the-art encryption and security protocols to protect your sensitive financial information.</div>
+                </div>
+            </section>
+    
+            <!-- Newsletter Signup -->
+            <section class="newsletter">
+                <h2>Stay Updated with Fiscal Insights</h2>
+                <p>Subscribe to our newsletter for tax tips, financial strategies, and company updates</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="newsletter-button">Subscribe</button>
+                </form>
+            </section>
+
+        <footer class="footer">
+            © 2024 Fiscal Gateway. All Rights Reserved.
+        </footer>
+    </div>
+    <script>
+        // FAQ Accordion Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html>

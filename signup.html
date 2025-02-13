@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Fiscal Gateway</title>
+    <style>
+        :root {
+            --primary-blue: #3669C9;
+            --primary-light: #EBF2FF;
+            --secondary-blue: #5A8AE4;
+            --secondary-green: #67B82D;
+            --text-dark: #1A202C;
+            --text-gray: #4A5568;
+            --background-light: #F7FAFC;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f4fc 0%, #f5fbf0 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary-blue), #5A8AE4);
+            clip-path: polygon(0 0, 100% 0, 100% 60%, 0% 100%);
+            z-index: 0;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Existing signup form styles */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-title {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .header-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .signup-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(54, 105, 201, 0.15);
+        }
+
+        /* Existing form styles remain the same */
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #E2E8F0;
+            background: var(--background-light);
+            border-radius: 0.75rem;
+            color: var(--text-dark);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(54, 105, 201, 0.1);
+        }
+
+        .terms-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--primary-light);
+            border-radius: 0.75rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 0.25rem;
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--primary-blue), #5A8AE4);
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -15px rgba(54, 105, 201, 0.4);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #3669C9, #5A8AE4);
+            color: white;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-section h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-section p {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            padding: 2rem 2rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-bottom p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #E2E8F0;
+            background: var(--background-light);
+            border-radius: 0.75rem;
+            color: var(--text-dark);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234A5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.5em;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(54, 105, 201, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="#" class="logo">
+            <svg viewBox="0 0 200 150">
+                <path d="M100 30 C60 30, 30 60, 30 100" fill="white" />
+                <path d="M100 30 C140 30, 170 60, 170 100" fill="#67B82D" />
+            </svg>
+            <span class="logo-text">Fiscal Gateway</span>
+        </a>
+        <nav class="nav-links">
+            <a href="newmain.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="signup.html">Signup</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <header class="header-title">
+            <h1>Create Your Account</h1>
+            <p>Join Fiscal Gateway and streamline your business operations</p>
+        </header>
+
+        <!-- Existing form content -->
+        <form class="signup-form">
+            <!-- Company Information Section -->
+            <div class="form-section">
+                <h2>Company Information</h2>
+                <div class="form-group">
+                    <label for="companyName">Name of Company</label>
+                    <input type="text" id="companyName" required>
+                </div>
+                <div class="form-group">
+                    <label for="tradeName">Trade Name</label>
+                    <input type="text" id="tradeName">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tinNumber">TIN Number</label>
+                        <input type="text" id="tinNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vatNumber">VAT Number</label>
+                        <input type="text" id="vatNumber">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Details Section -->
+            <div class="form-section">
+                <h2>Contact Details</h2>
+                <div class="form-group">
+                    <label for="contactName">Contact Name</label>
+                    <input type="text" id="contactName" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contactNumber">Contact Number</label>
+                        <input type="tel" id="contactNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailAddress">Email Address</label>
+                        <input type="email" id="emailAddress" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location Section -->
+            <div class="form-section">
+                <h2>Location</h2>
+                <div class="form-group">
+                    <label for="standNumber">Stand Number/House Number</label>
+                    <input type="text" id="standNumber" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="province">Province</label>
+                        <input type="text" id="province" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="region">Region</label>
+                        <input type="text" id="region" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Branches Section -->
+            <div class="form-section">
+                <h2>Devices</h2>
+                <div class="form-group">
+                    <label for="Devices">Number of Devices</label>
+                    <input type="number" id="devices" min="0" required>
+                </div>
+            </div>
+
+            <!-- Terms & Conditions Section -->
+            <div class="terms-section">
+                <div class="form-group">
+                    <label for="subscription">Subscription Duration</label>
+                    <select id="subscription" required>
+                        <option value="">Select duration</option>
+                        <option value="3">3 months</option>
+                        <option value="6">6 months</option>
+                        <option value="12">12 months</option>
+                    </select>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-gray);">
+                        The subscription will be effective starting from the date of live production.
+                    </p>
+                </div>
+                <div class="checkbox-group" style="margin-top: 1.5rem;">
+                    <input type="checkbox" id="refundPolicy" required>
+                    <label for="refundPolicy">Non-Refund Policy: Once a transaction is completed, it cannot be reversed. Please double-check your order before finalizing your purchase.</label>
+                </div>
+            </div>
+    
+            <button type="submit">Create Account</button>
+        </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About us</h3>
+                <p>Fiscal Gateway is a leading provider of financial solutions and technical services, empowering modern businesses to achieve their financial goals.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Fiscal Portal</h3>
+                <p>Access your account, manage transactions, and stay updated with the latest financial news and updates.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Latest updates</h3>
+                <p>Stay connected with our latest news and updates about our services and financial industry trends.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Fiscal Gateway. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add this script just before the closing body tag
+const form = document.querySelector('.signup-form');
+const termsSection = document.querySelector('.terms-section');
+const submitButton = form.querySelector('button[type="submit"]');
+
+// Initially hide the terms section and submit button
+termsSection.style.display = 'none';
+submitButton.style.display = 'none';
+
+// Required fields array
+const requiredFields = [
+    'companyName',
+    'tinNumber',
+    'contactName',
+    'contactNumber',
+    'emailAddress',
+    'standNumber',
+    'province',
+    'region',
+    'branches'
+];
+
+// Function to validate email format
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Function to validate phone number format
+function isValidPhone(phone) {
+    const phoneRegex = /^\+?[\d\s-]{8,}$/;
+    return phoneRegex.test(phone);
+}
+
+// Function to check if all required fields are filled
+function validateForm() {
+    let isValid = true;
+    
+    // Reset all fields' styles
+    form.querySelectorAll('input').forEach(input => {
+        input.style.borderColor = '#E2E8F0';
+        const label = form.querySelector(`label[for="${input.id}"]`);
+        if (label) {
+            label.style.color = 'var(--text-gray)';
+        }
+    });
+
+    // Check each required field
+    requiredFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (!field.value.trim()) {
+            isValid = false;
+            field.style.borderColor = '#DC2626';
+            const label = form.querySelector(`label[for="${fieldId}"]`);
+            if (label) {
+                label.style.color = '#DC2626';
+            }
+        }
+    });
+
+    // Additional validation for email and phone
+    const emailField = document.getElementById('emailAddress');
+    const phoneField = document.getElementById('contactNumber');
+
+    if (!isValidEmail(emailField.value.trim())) {
+        isValid = false;
+        emailField.style.borderColor = '#DC2626';
+        const label = form.querySelector('label[for="emailAddress"]');
+        if (label) {
+            label.style.color = '#DC2626';
+        }
+    }
+
+    if (!isValidPhone(phoneField.value.trim())) {
+        isValid = false;
+        phoneField.style.borderColor = '#DC2626';
+        const label = form.querySelector('label[for="contactNumber"]');
+        if (label) {
+            label.style.color = '#DC2626';
+        }
+    }
+
+    // Show/hide terms section based on validation
+    if (isValid) {
+        termsSection.style.display = 'block';
+        submitButton.style.display = 'block';
+        
+        // Smooth scroll to terms section
+        termsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+        termsSection.style.display = 'none';
+        submitButton.style.display = 'none';
+    }
+}
+
+// Add input event listeners to all form fields
+form.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', validateForm);
+});
+
+// Add form submit handler
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const subscriptionSelect = document.getElementById('subscription');
+    const refundPolicyCheckbox = document.getElementById('refundPolicy');
+    
+    if (!subscriptionSelect.value) {
+        subscriptionSelect.style.borderColor = '#DC2626';
+        return;
+    }
+    
+    if (!refundPolicyCheckbox.checked) {
+        refundPolicyCheckbox.parentElement.style.color = '#DC2626';
+        return;
+    }
+    
+    // If everything is valid, you can submit the form here
+    console.log('Form submitted successfully');
+});
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/g-captcha/6.0.1/g-captcha.min.js"></script>
+</body>
+</html>
